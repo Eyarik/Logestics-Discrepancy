@@ -6,15 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ItemValidator extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
+    
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +16,17 @@ class ItemValidator extends FormRequest
     public function rules()
     {
         return [
-            //
+'item_description'=>'required',
+'PI'=>'required',
+'consignee_id'=>'required',
+'air_discharge_id'=>'required',
+'sea_discharge_id'=>'required',
+'air_loading_id'=>'required',
+'sea_loading_id'=>'required',
+'bank_detail_id'=>'required',
+'owner_id'=>'required',
+'shipment_mode_id'=>'required',
+'term_id'=>'required',
         ];
     }
 }

@@ -6,16 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ShipmentModeValidator extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
-
+    
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,7 +15,7 @@ class ShipmentModeValidator extends FormRequest
     public function rules()
     {
         return [
-            //
+            'shipment_mode'=>'required'
         ];
     }
 }

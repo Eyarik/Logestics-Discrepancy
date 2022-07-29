@@ -6,15 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class TermValidator extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
+   
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +16,10 @@ class TermValidator extends FormRequest
     public function rules()
     {
         return [
-            //
+            'partial_shipment'=>'required',
+            'trans_shipment'=>'required',
+            'lc_type'=>'required',
+            'frieght_payment'=>'required'
         ];
     }
 }

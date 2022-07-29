@@ -6,15 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ConsagneeValidator extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
+   
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +16,10 @@ class ConsagneeValidator extends FormRequest
     public function rules()
     {
         return [
-            //
+            'bank_name'=>'required',
+            'address'=>'required',
+            'tf_number'=>'required',
+            'permit_number'=>'required',
         ];
     }
 }
