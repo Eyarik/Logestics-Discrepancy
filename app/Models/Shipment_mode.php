@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Shipment_mode extends Model
 {
     use HasFactory;
+
+    protected $fillable=['shipment_mode','isDeleted'];
 }

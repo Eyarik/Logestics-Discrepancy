@@ -16,7 +16,7 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->bigInteger('id')->primary();
             $table->text('item_description')->nullable();
-            $table->string('PI', 50)->nullable();
+            $table->json('PI', 50)->nullable();
             $table->bigInteger('consignee_id')->nullable()->index('IXFK_Items_Consignees');
             $table->bigInteger('air_discharge_id')->nullable()->index('IXFK_Items_Air_discharge_port');
             $table->bigInteger('sea_discharge_id')->nullable()->index('IXFK_Items_Sea_discharge_port');
@@ -27,6 +27,8 @@ class CreateItemsTable extends Migration
             $table->bigInteger('shipment_mode_id')->nullable()->index('IXFK_Items_Shipment_modes');
             $table->bigInteger('term_id')->nullable()->index('IXFK_Items_Terms');
             $table->boolean('isDeleted')->nullable()->default(false);
+            $table->timestamps();
+
         });
     }
 

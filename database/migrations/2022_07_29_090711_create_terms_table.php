@@ -19,6 +19,8 @@ class CreateTermsTable extends Migration
             $table->string('trans_shipment', 50)->nullable();
             $table->string('lc_type', 200)->nullable();
             $table->string('frieght_payment', 200)->nullable();
+            $table->timestamps();
+
         });
     }
 

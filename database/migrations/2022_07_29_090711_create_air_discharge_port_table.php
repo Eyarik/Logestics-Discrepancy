@@ -20,6 +20,8 @@ class CreateAirDischargePortTable extends Migration
             $table->string('code', 50)->nullable();
             $table->bigInteger('origin_id')->nullable()->index('IXFK_Air_discharge_port_Origins');
             $table->boolean('isDeleted')->nullable()->default(false);
+            $table->timestamps();
+
         });
     }
 

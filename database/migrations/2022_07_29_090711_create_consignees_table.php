@@ -20,6 +20,8 @@ class CreateConsigneesTable extends Migration
             $table->string('tf_number', 100)->nullable();
             $table->string('permit_number', 100)->nullable();
             $table->boolean('isDeleted')->nullable()->default(false);
+            $table->timestamps();
+
         });
     }
 

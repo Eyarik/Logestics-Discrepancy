@@ -22,6 +22,8 @@ class CreateOwnersTable extends Migration
             $table->string('attn_phone_number', 50)->nullable();
             $table->string('attn_email', 50)->nullable();
             $table->boolean('isDeleted')->nullable()->default(false);
+            $table->timestamps();
+
         });
     }
 

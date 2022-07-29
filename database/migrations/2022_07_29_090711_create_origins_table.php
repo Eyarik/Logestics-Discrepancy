@@ -16,7 +16,9 @@ class CreateOriginsTable extends Migration
         Schema::create('origins', function (Blueprint $table) {
             $table->bigInteger('id')->primary();
             $table->string('name', 50)->nullable();
-            $table->boolean('code')->nullable()->default(false);
+            $table->string('code')->nullable();
+            $table->timestamps();
+
         });
     }
 

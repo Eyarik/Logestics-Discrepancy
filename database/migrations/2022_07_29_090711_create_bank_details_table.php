@@ -21,6 +21,8 @@ class CreateBankDetailsTable extends Migration
             $table->string('account_number', 50)->nullable();
             $table->string('beneficiary_bank_name', 50)->nullable();
             $table->boolean('isDeleted')->nullable()->default(false);
+            $table->timestamps();
+
         });
     }
 

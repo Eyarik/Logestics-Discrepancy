@@ -17,6 +17,8 @@ class CreateShipmentModesTable extends Migration
             $table->bigInteger('id')->primary();
             $table->string('shipment_mode', 50)->nullable();
             $table->boolean('isDeleted')->nullable()->default(false);
+            $table->timestamps();
+
         });
     }
 
