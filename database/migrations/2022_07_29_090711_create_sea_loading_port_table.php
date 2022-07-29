@@ -18,7 +18,7 @@ class CreateSeaLoadingPortTable extends Migration
             $table->string('country', 50)->nullable();
             $table->string('port_name', 50)->nullable();
             $table->string('code', 50)->nullable();
-            $table->bigInteger('origin_id')->nullable()->index('IXFK_Sea_loading_port_Origins');
+            $table->unsignedBigInteger('origin_id')->nullable()->index('IXFK_Sea_loading_port_Origins');
             $table->boolean('isDeleted', 50)->nullable()->default(false);
             $table->timestamps();
 

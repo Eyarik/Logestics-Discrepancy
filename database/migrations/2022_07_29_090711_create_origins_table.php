@@ -14,7 +14,7 @@ class CreateOriginsTable extends Migration
     public function up()
     {
         Schema::create('origins', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->string('name', 50)->nullable();
             $table->string('code')->nullable();
             $table->timestamps();

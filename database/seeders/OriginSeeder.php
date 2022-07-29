@@ -15,8 +15,7 @@ class OriginSeeder extends Seeder
      */
     public function run()
     {
-        
-        //
+
       DB::table('origins')->insert([
             ['name' => 'Afghanistan', 'code' => 'AF','id'=>'1'],
             ['name' => 'Åland Islands', 'code' => 'AX','id'=>'2'],
@@ -268,6 +267,6 @@ class OriginSeeder extends Seeder
             ['name' => 'Zambia', 'code' => 'ZM','id'=>'247'],
             ['name' => 'Zimbabwe', 'code' => 'ZW','id'=>'248'],
         ]);
-      
+
     }
 }

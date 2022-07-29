@@ -17,7 +17,7 @@ class CreateAirLoadingPortTable extends Migration
             $table->bigInteger('id')->primary();
             $table->string('country', 300)->nullable();
             $table->string('port_name', 300)->nullable();
-            $table->bigInteger('origin_id')->nullable()->index('IXFK_Air_loading_port_Origins');
+            $table->unsignedBigInteger('origin_id')->nullable()->index('IXFK_Air_loading_port_Origins');
             $table->boolean('isDeleted', 50)->nullable()->default(false);
             $table->timestamps();
 
