@@ -14,7 +14,7 @@ class BankDetailController extends Controller
 
     public function index()
     {
-        $Bank_detail = Bank_detail::with('')->where('isDeleted', false)->get();
+        $Bank_detail = Bank_detail::where('isDeleted', false)->get();
         return $this->successResponse($Bank_detail, 200);
     }
 
@@ -43,10 +43,10 @@ class BankDetailController extends Controller
 
     public function show($id)
     {
-        $Bank_detail = Bank_detail::find($id);
-        if (!$Bank_detail) {
+        $Bank_detail = Bank_detail::where('id', $id)->get();
+        if ($Bank_detail==null) {
 
-            Log::info("Bank Detail id=" . $Bank_detail->id . " not found");
+            Log::info("Bank Detail id=" . $id . " not found");
             return $this->errorResponse(' Id Not found');
         } elseif ($Bank_detail->isDeleted == true) {
 

@@ -19,7 +19,8 @@ class ItemController extends Controller
 
     public function index()
     {
-        $Items = DB::table('Items')->where('isDeleted', false)->get();
+        $Items = Item::with('Consignee','AirDischarge','SeaDischarge','AirLoading','SeaLoading',
+        'BankDetail','Owner','ShipmentMode','Term')->where('isDeleted', false)->get();
         return $this->successResponse($Items, 200);
 
     }
@@ -70,7 +71,8 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $Item = Item::find($id);
+        $Item =Item::with('Consignee','AirDischarge','SeaDischarge','AirLoading','SeaLoading',
+        'BankDetail','Owner','ShipmentMode','Term')->where('id', $id)->get();
         if ($Item==null) {
 
             Log::info("Item id=" . $id . " not found");

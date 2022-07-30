@@ -14,7 +14,7 @@ class SeaLoadingPortController extends Controller
 
     public function index()
     {
-        $Sea_loading_port = Sea_loading_port::with('')->where('isDeleted', false)->get();
+        $Sea_loading_port = Sea_loading_port::with('SeaLoadingOrigin')->where('isDeleted', false)->get();
         return $this->successResponse($Sea_loading_port, 200);
     }
 
@@ -39,10 +39,10 @@ class SeaLoadingPortController extends Controller
 
     public function show($id)
     {
-        $Sea_loading_port = Sea_loading_port::find($id);
-        if (!$Sea_loading_port) {
+        $Sea_loading_port = Sea_loading_port::with('SeaLoadingOrigin')->where('id', $id)->get();
+        if ($Sea_loading_port==null) {
 
-            Log::info("Sea Loading id=" . $Sea_loading_port->id . " not found");
+            Log::info("Sea Loading id=" . $id . " not found");
             return $this->errorResponse(' Id Not found');
         } elseif ($Sea_loading_port->isDeleted == true) {
 
