@@ -6,6 +6,7 @@ use App\Models\Consagnee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\Validators\ConsagneeValidator;
+use App\Utilities\ApiResponser;
 
 class ConsagneeController extends Controller
 {

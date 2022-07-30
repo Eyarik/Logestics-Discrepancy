@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\AirDischargePortController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Supplier\BankDetailController;
-use App\Models\Supplier;
+
 
 //  Supplier Route
 

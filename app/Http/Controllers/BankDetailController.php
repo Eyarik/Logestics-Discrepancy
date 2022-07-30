@@ -6,6 +6,7 @@ use App\Models\Bank_detail;
 use Illuminate\Http\Request;
 use App\Http\Requests\Validators\BankDetailsValidator;
 use Illuminate\Support\Facades\Log;
+use App\Utilities\ApiResponser;
 
 class BankDetailController extends Controller
 {

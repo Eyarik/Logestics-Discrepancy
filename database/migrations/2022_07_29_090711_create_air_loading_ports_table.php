@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAirLoadingPortTable extends Migration
+class CreateAirLoadingPortsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAirLoadingPortTable extends Migration
      */
     public function up()
     {
-        Schema::create('air_loading_port', function (Blueprint $table) {
+        Schema::create('air_loading_ports', function (Blueprint $table) {
             $table->id();
             $table->string('country', 300)->nullable();
             $table->string('port_name', 300)->nullable();
@@ -31,6 +31,6 @@ class CreateAirLoadingPortTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('air_loading_port');
+        Schema::dropIfExists('air_loading_ports');
     }
 }

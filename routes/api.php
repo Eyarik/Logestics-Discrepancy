@@ -15,4 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 require __DIR__ . '/api/originapi.php';
+require __DIR__ . '/api/airDischargePortapi.php';
+require __DIR__ . '/api/airLoadingapi.php';
+require __DIR__ . '/api/bankdetailapi.php';
+require __DIR__ . '/api/consigneeapi.php';
+require __DIR__ . '/api/itemapi.php';
+require __DIR__ . '/api/ownerapi.php';
+require __DIR__ . '/api/seaDischargeapi.php';
+require __DIR__ . '/api/seaLoadingapi.php';
+require __DIR__ . '/api/shipmentmodeapi.php';
+require __DIR__ . '/api/termapi.php';
 
