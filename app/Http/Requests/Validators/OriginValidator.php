@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class OriginValidator extends FormRequest
 {
-   
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -16,7 +16,8 @@ class OriginValidator extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'code' => 'required'
         ];
     }
 }
