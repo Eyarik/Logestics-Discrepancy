@@ -14,7 +14,7 @@ class CreateTermsTable extends Migration
     public function up()
     {
         Schema::create('terms', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->string('partial_shipment', 50)->nullable();
             $table->string('trans_shipment', 50)->nullable();
             $table->string('lc_type', 200)->nullable();

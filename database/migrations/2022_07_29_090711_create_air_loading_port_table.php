@@ -14,10 +14,10 @@ class CreateAirLoadingPortTable extends Migration
     public function up()
     {
         Schema::create('air_loading_port', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->string('country', 300)->nullable();
             $table->string('port_name', 300)->nullable();
-            $table->bigInteger('origin_id')->nullable()->index('IXFK_Air_loading_port_Origins');
+            $table->unsignedBigInteger('origin_id')->nullable()->index('IXFK_Air_loading_port_Origins');
             $table->boolean('isDeleted', 50)->nullable()->default(false);
             $table->timestamps();
 

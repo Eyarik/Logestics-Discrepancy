@@ -14,18 +14,18 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->text('item_description')->nullable();
             $table->json('PI', 50)->nullable();
-            $table->bigInteger('consignee_id')->nullable()->index('IXFK_Items_Consignees');
-            $table->bigInteger('air_discharge_id')->nullable()->index('IXFK_Items_Air_discharge_port');
-            $table->bigInteger('sea_discharge_id')->nullable()->index('IXFK_Items_Sea_discharge_port');
-            $table->bigInteger('air_loading_id')->nullable()->index('IXFK_Items_Air_loading_port');
-            $table->bigInteger('sea_loading_id')->nullable()->index('IXFK_Items_Sea_loading_port');
-            $table->bigInteger('bank_detail_id')->nullable()->index('IXFK_Items_Bank_details');
-            $table->bigInteger('owner_id')->nullable()->index('IXFK_Items_Owners');
-            $table->bigInteger('shipment_mode_id')->nullable()->index('IXFK_Items_Shipment_modes');
-            $table->bigInteger('term_id')->nullable()->index('IXFK_Items_Terms');
+            $table->unsignedBigInteger('consignee_id')->nullable()->index('IXFK_Items_Consignees');
+            $table->unsignedBigInteger('air_discharge_id')->nullable()->index('IXFK_Items_Air_discharge_port');
+            $table->unsignedBigInteger('sea_discharge_id')->nullable()->index('IXFK_Items_Sea_discharge_port');
+            $table->unsignedBigInteger('air_loading_id')->nullable()->index('IXFK_Items_Air_loading_port');
+            $table->unsignedBigInteger('sea_loading_id')->nullable()->index('IXFK_Items_Sea_loading_port');
+            $table->unsignedBigInteger('bank_detail_id')->nullable()->index('IXFK_Items_Bank_details');
+            $table->unsignedBigInteger('owner_id')->nullable()->index('IXFK_Items_Owners');
+            $table->unsignedBigInteger('shipment_mode_id')->nullable()->index('IXFK_Items_Shipment_modes');
+            $table->unsignedBigInteger('term_id')->nullable()->index('IXFK_Items_Terms');
             $table->boolean('isDeleted')->nullable()->default(false);
             $table->timestamps();
 

@@ -14,11 +14,11 @@ class CreateAirDischargePortTable extends Migration
     public function up()
     {
         Schema::create('air_discharge_port', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->string('country', 50)->nullable();
             $table->string('port_name', 50)->nullable();
             $table->string('code', 50)->nullable();
-            $table->bigInteger('origin_id')->nullable()->index('IXFK_Air_discharge_port_Origins');
+            $table->unsignedBigInteger('origin_id')->nullable()->index('IXFK_Air_discharge_port_Origins');
             $table->boolean('isDeleted')->nullable()->default(false);
             $table->timestamps();
 

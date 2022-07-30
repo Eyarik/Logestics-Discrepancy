@@ -14,7 +14,7 @@ class CreateOwnersTable extends Migration
     public function up()
     {
         Schema::create('owners', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->string('client_name', 50)->nullable();
             $table->string('address', 50)->nullable();
             $table->string('tin_number', 50)->nullable();
