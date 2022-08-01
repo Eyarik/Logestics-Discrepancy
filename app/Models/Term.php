@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Item;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Term extends Model
 {
     use HasFactory;
 
     protected $fillable=['partial_shipment','trans_shipment','lc_type','frieght_payment'];
+
+    public function TermItem()
+    {
+        return $this->hasMany(Item::class, 'term_id', 'id');
+    }
 }

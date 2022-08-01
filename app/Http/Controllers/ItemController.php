@@ -26,7 +26,8 @@ class ItemController extends Controller
 
     public function index()
     {
-        $Items = DB::table('Items')->where('isDeleted', false)->get();
+        $Items = Item::with('Consignee','AirDischarge','SeaDischarge','AirLoading','SeaLoading',
+        'BankDetail','Owner','ShipmentMode','Term')->where('isDeleted', false)->get();
         return $this->successResponse($Items, 200);
 
     }
@@ -136,7 +137,8 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $Item = Item::find($id);
+        $Item =Item::with('Consignee','AirDischarge','SeaDischarge','AirLoading','SeaLoading',
+        'BankDetail','Owner','ShipmentMode','Term')->where('id', $id)->get();
         if ($Item==null) {
 
             Log::info("Item id=" . $id . " not found");
@@ -175,16 +177,16 @@ class ItemController extends Controller
 
         $Item->update([
             'item_description' => $validator['item_description'],
-            'PI' => $validator['PI'],
-            'consignee_id' => $validator['consignee_id'],
-            'air_discharge_id' => $validator['air_discharge_id'],
-            'sea_discharge_id' => $validator['sea_discharge_id'],
-            'air_loading_id' => $validator['air_loading_id'],
-            'sea_loading_id' => $validator['sea_loading_id'],
-            'bank_detail_id' => $validator['bank_detail_id'],
-            'owner_id' => $validator['owner_id'],
-            'shipment_mode_id' => $validator['shipment_mode_id'],
-            'term_id' => $validator['term_id'],
+            'PI' => $request->PI,
+            'consignee_id' => $request->consignee_id,
+            'air_discharge_id' => $request->air_discharge_id,
+            'sea_discharge_id' => $request->sea_discharge_id,
+            'air_loading_id' => $request->air_loading_id,
+            'sea_loading_id' => $request->sea_loading_id,
+            'bank_detail_id' => $request->bank_detail_id,
+            'owner_id' => $request->owner_id,
+            'shipment_mode_id' => $request->shipment_mode_id,
+            'term_id' => $request->term_id,
 
         ]);
 

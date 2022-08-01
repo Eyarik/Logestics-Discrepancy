@@ -20,7 +20,7 @@ class ConsagneeController extends Controller
 
     public function index()
     {
-        $Consagnees = DB::table('Consagnees')->where('isDeleted', false)->get();
+        $Consagnees = Consagnee::with('isDeleted',false)->get();
         return $this->successResponse($Consagnees, 200);
 
     }

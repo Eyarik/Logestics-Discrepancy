@@ -22,7 +22,7 @@ class AirDischargePortController extends Controller
 
     public function index()
     {
-        $Air_discharge_port = Air_discharge_port::with('')->where('isDeleted', false)->get();
+        $Air_discharge_port =Air_discharge_port::with('AirDischargeOrigin')->get();
         return $this->successResponse($Air_discharge_port, 200);
     }
 
@@ -50,10 +50,10 @@ class AirDischargePortController extends Controller
 
     public function show($id)
     {
-        $Air_discharge_port = Air_discharge_port::find($id);
-        if (!$Air_discharge_port) {
+        $Air_discharge_port =Air_discharge_port::with('AirDischargeOrigin')->where('id',$id)->get();
+        if ($Air_discharge_port==null) {
 
-            Log::info("Air Discharge id=" . $Air_discharge_port->id . " not found");
+            Log::info("Air Discharge id=" . $id . " not found");
             return $this->errorResponse(' Id Not found');
         } elseif ($Air_discharge_port->isDeleted == true) {
 

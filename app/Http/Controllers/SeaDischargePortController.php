@@ -14,7 +14,7 @@ class SeaDischargePortController extends Controller
 
     public function index()
     {
-        $Sea_discharge_port = Sea_discharge_port::with('')->where('isDeleted', false)->get();
+        $Sea_discharge_port = Sea_discharge_port::with('SeaDischargeOrigin')->where('isDeleted', false)->get();
         return $this->successResponse($Sea_discharge_port, 200);
     }
 
@@ -39,10 +39,10 @@ class SeaDischargePortController extends Controller
 
     public function show($id)
     {
-        $Sea_discharge_port = Sea_discharge_port::find($id);
-        if (!$Sea_discharge_port) {
+        $Sea_discharge_port =Sea_discharge_port::with('SeaDischargeOrigin')->where('id', $id)->get();
+        if ($Sea_discharge_port==null) {
 
-            Log::info("Sea Discharge id=" . $Sea_discharge_port->id . " not found");
+            Log::info("Sea Discharge id=" . $id . " not found");
             return $this->errorResponse(' Id Not found');
         } elseif ($Sea_discharge_port->isDeleted == true) {
 

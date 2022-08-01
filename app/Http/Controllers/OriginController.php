@@ -32,7 +32,7 @@ class OriginController extends Controller
     public function show($id)
     {
         $origin = Origin::where('id', $id)->first();
-        if (!$origin) {
+        if ($origin==null) {
 
             Log::info("Origin id=" . $id . " not found");
             return $this->errorResponse(' Id Not found');

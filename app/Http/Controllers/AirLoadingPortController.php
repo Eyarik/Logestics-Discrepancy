@@ -15,7 +15,7 @@ class AirLoadingPortPortController extends Controller
 
     public function index()
     {
-        $Air_loading_port = Air_loading_port::with('')->where('isDeleted', false)->get();
+        $Air_loading_port = Air_loading_port::with('AirLoadingOrigin')->get();
         return $this->successResponse($Air_loading_port, 200);
     }
 
@@ -39,10 +39,10 @@ class AirLoadingPortPortController extends Controller
 
     public function show($id)
     {
-        $Air_loading_port = Air_loading_port::find($id);
-        if (!$Air_loading_port) {
+        $Air_loading_port = Air_loading_port::with('AirLoadingOrigin')->where('id',$id)->get();
+        if ($Air_loading_port==null) {
 
-            Log::info("Air Loading id=" . $Air_loading_port->id . " not found");
+            Log::info("Air Loading id=" . $id . " not found");
             return $this->errorResponse(' Id Not found');
         } elseif ($Air_loading_port->isDeleted == true) {
 

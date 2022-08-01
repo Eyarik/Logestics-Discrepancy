@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -11,8 +14,12 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+<<<<<<< HEAD
         "maatwebsite/excel": "^3.1",
         "psr/simple-cache": "^1.0"
+=======
+        "phpoffice/phpword": "^0.18.3"
+>>>>>>> e927bc90418b94c8a8e5e7b6d27cc6e6a5a4975e
     },
     "require-dev": {
         "facade/ignition": "^2.5",

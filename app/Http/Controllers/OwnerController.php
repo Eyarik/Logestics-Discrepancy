@@ -36,7 +36,7 @@ class OwnerController extends Controller
     public function show($id)
     {
         $owner = Owner::where('id', $id)->first();
-        if (!$owner) {
+        if ($owner==null) {
 
             Log::info("Owner id=" . $id . " not found");
             return $this->errorResponse(' Id Not found');
