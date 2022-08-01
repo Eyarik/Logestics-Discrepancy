@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Item;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpWord\TemplateProcessor;
 
@@ -8,7 +10,7 @@ class DocumentPreparationController extends Controller
 {
 Public function PackingList($id){
 
-  
+
 $template = new TemplateProcessor('pltemplate.docx');
 $items=DB::table('items')->where('items.id',$id)->first();
 $consignees=DB::table('items')->where('items.id',$id)
@@ -41,11 +43,12 @@ $template->setValue('ItemDescription', $items->item_description);
 $template->saveAs('PL.docx');
 
 return response()->download(public_path('PL.docx'));
-    
+
 }
 Public function CommercialInvoice($id){
 $template = new TemplateProcessor('comercialInvoicetemplate.docx');
-$items=DB::table('items')->where('items.id',$id)->first();
+$items =Item::with('Consignee','AirDischarge','SeaDischarge','AirLoading','SeaLoading',
+        'BankDetail','Owner','ShipmentMode','Term')->where('id', $id)->first();
 $consignees=DB::table('items')->where('items.id',$id)
 ->join('consagnees','items.consignee_id','=','consagnees.id')
 ->first();
@@ -128,6 +131,27 @@ $template->setValue('Iban', $banks->iban_number);
 $template->setValue('SwiftCode', $banks->swift_code);
 $template->setValue('AccountNumber', $banks->account_number);
 $template->setValue('BankName', $banks->bank_name);
+
+$pi = [];
+foreach ($items->PI as $key => $item) {
+    $val = [
+        'ItemPartNumber' => $item['part_number'],
+        'Description' => $item['item_description'],
+        'HsCode' => $item['hs_code'],
+        'UOM' => $item['uom'],
+        'QTY' => $item['qty'],
+    ];
+
+    $pi[] = $val;
+
+}
+
+return $pi;
+$template->cloneRowAndSetValues('ItemPartNumber', $pi);
+
+
+
+
 
 $template->saveAs('CI.docx');
 return response()->download(public_path('CI.docx'));

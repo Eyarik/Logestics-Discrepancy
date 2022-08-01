@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Requests\Validators\AirLoadingPortValidator;
 use App\Utilities\ApiResponser;
 
-class AirLoadingPortPortController extends Controller
+class AirLoadingPortController extends Controller
 {
 
     use ApiResponser;

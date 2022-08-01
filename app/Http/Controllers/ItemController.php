@@ -53,8 +53,8 @@ class ItemController extends Controller
             'address' => $validator['consagnee_address'],
             'tf_number' => $validator['consagnee_tf_number'],
             'permit_number' => $validator['consagnee_permit_number'],
-            'postalCode' => $validator['postalCode'],
-            'phoneNumber' => $validator['phoneNumber'],
+            'postalCode' => $validator['consagnee_postalCode'],
+            'phoneNumber' => $validator['consagnee_phoneNumber'],
         ]);
 
         $term = Term::create([
@@ -62,6 +62,7 @@ class ItemController extends Controller
             'trans_shipment' => $validator['trans_shipment'],
             'lc_type' => $validator['lc_type'],
             'frieght_payment' => $validator['frieght_payment'],
+            'payment_mode' => $validator['payment_mode']
         ]);
 
         $owner = Owner::create([
@@ -72,6 +73,7 @@ class ItemController extends Controller
             'attn_phone_number' => $validator['attn_phone_number'],
             'attn_email' => $validator['attn_email'],
         ]);
+
         $mandatory_doc = Mandatory_Document::create([
             'comertial_invoice_original' => $validator['comertial_invoice_original'],
             'comertial_invoice_copy' => $validator['comertial_invoice_copy'],
@@ -108,26 +110,26 @@ class ItemController extends Controller
             }
         }
 
-        $item = Item::create([
-            'item_description' => $validator['item_description'],
-            'PI' => $pi_data,
-            'consignee_id' => $consagnee->id,
-            'air_discharge_id' => $validator['air_discharge_id'],
-            'sea_discharge_id' => $validator['sea_discharge_id'],
-            'air_loading_id' => $validator['air_loading_id'],
-            'sea_loading_id' => $validator['sea_loading_id'],
-            'bank_detail_id' => $validator['bank_detail_id'],
-            'owner_id' => $owner->id,
-            'shipment_mode_id' => $validator['shipment_mode_id'],
-            'term_id' => $term->id,
-            'project_name' => $validator['project_name'],
-            'item_type' => $validator['item_type'],
-            'mandatory_doc_id' => $mandatory_doc->id,
-        ]);
+        $item = new Item();
+        $item->item_description = $request->item_description;
+        $item->consignee_id = $consagnee->id;
+        $item->air_discharge_id =  $validator['air_discharge_id'];
+        $item->sea_discharge_id = $validator['sea_discharge_id'];
+        $item->air_loading_id = $validator['air_loading_id'];
+        $item->sea_loading_id = $validator['sea_loading_id'];
+        $item->bank_detail_id = $validator['bank_detail_id'];
+        $item->owner_id = $owner->id;
+        $item->shipment_mode_id = $validator['shipment_mode_id'];
+        $item->term_id = $term->id;
+        $item->project_name = $validator['project_name'];
+        $item->item_type = $validator['item_type'];
+        $item->mandatory_doc_id = $mandatory_doc->id;
+        $item->PI = $pi_data;
+        $item->save();
 
         Log::info("Item Id= " . $item->id . " created succesfully");
 
-        return $this->successResponse($item, 200);
+        return $this->successResponse($item, 201);
 
     }
 
@@ -140,7 +142,7 @@ class ItemController extends Controller
     public function show($id)
     {
         $Item =Item::with('Consignee','AirDischarge','SeaDischarge','AirLoading','SeaLoading',
-        'BankDetail','Owner','ShipmentMode','Term')->where('id', $id)->get();
+        'BankDetail','Owner','ShipmentMode','Term')->where('id', $id)->first();
         if ($Item==null) {
 
             Log::info("Item id=" . $id . " not found");
@@ -153,7 +155,11 @@ class ItemController extends Controller
 
         }
 
-        return $this->successResponse($Item, 200);
+        foreach ($Item->PI as $key => $pi) {
+            return $pi['part_number'];
+        }
+
+        return $this->successResponse($Item->PI, 200);
 
     }
 

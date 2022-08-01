@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
+    "content-hash": "545b620dde1d96b3ed84daa7c988b60d",
+=======
     "content-hash": "a7405f8d3e44db01b19fbf9235066560",
+>>>>>>> 920d0997fa5ac6892dbc9b2706192b45a8a724fe
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2839,6 +2843,8 @@
             "time": "2022-01-27T09:35:39+00:00"
         },
         {
+<<<<<<< HEAD
+=======
             "name": "paragonie/random_compat",
             "version": "v9.99.100",
             "source": {
@@ -3033,6 +3039,7 @@
             "time": "2015-12-19T14:08:53+00:00"
         },
         {
+>>>>>>> 920d0997fa5ac6892dbc9b2706192b45a8a724fe
             "name": "phpoffice/phpspreadsheet",
             "version": "1.24.1",
             "source": {

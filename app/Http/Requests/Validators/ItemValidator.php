@@ -17,24 +17,24 @@ class ItemValidator extends FormRequest
     {
         return [
             'item_description'=>'required',
-            'PI'=>'required',
-            'consignee_id'=>'required',
+            'pi'=>'required',
             'air_discharge_id'=>'required',
             'sea_discharge_id'=>'required',
             'air_loading_id'=>'required',
             'sea_loading_id'=>'required',
             'bank_detail_id'=>'required',
-            'owner_id'=>'required',
             'shipment_mode_id'=>'required',
-            'term_id'=>'required',
             'consagnee_bank_name' => 'required',
             'consagnee_address' => 'required',
             'consagnee_tf_number' => 'required',
             'consagnee_permit_number' => 'required',
+            'consagnee_phoneNumber' => 'required',
+            'consagnee_postalCode' => 'required',
             'partial_shipment' => 'required',
             'trans_shipment' => 'required',
             'lc_type' => 'required',
             'frieght_payment' => 'required',
+            'payment_mode' => 'required',
             'client_name' => 'required',
             'owner_address' => 'required',
             'tin_number' => 'required',
@@ -49,8 +49,8 @@ class ItemValidator extends FormRequest
             'cirtificate_of_origin_copy' => 'required',
             'bill_of_loading_original' => 'required',
             'bill_of_loading_copy' => 'required',
-            'phoneNumber' => 'required',
-            'postalCode' => 'required'
+            'project_name' => 'required',
+            'item_type' => 'required'
         ];
     }
 }

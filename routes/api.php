@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AirDischargePortController;
+use App\Http\Controllers\SeaLoadingPortController;
 use App\Imports\AirDischargeImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,6 @@ require __DIR__ . '/api/termapi.php';
 require __DIR__ . '/api/packinglistapi.php';
 require __DIR__ . '/api/commercialinvoiceapi.php';
 
-Route::post('scm/discrepancy/airdischarge', [AirDischargePortController::class, 'store']);
+Route::post('scm/discrepancy/airdischarge', [SeaLoadingPortController::class, 'import']);
 
 

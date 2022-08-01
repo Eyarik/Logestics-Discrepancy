@@ -22,7 +22,7 @@ class AddForeignKeysToItemsTable extends Migration
             $table->foreign(['sea_loading_id'], 'FK_Items_Sea_loading_port')->references(['id'])->on('sea_loading_ports')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign(['air_loading_id'], 'FK_Items_Air_loading_port')->references(['id'])->on('air_loading_ports')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign(['term_id'], 'FK_Items_Terms')->references(['id'])->on('terms')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreign(['consignee_id'], 'FK_Items_Consignees')->references(['id'])->on('consignees')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign(['consignee_id'], 'FK_Items_Consignees')->references(['id'])->on('consagnees')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign(['mandatory_doc_id'], 'FK_Items_Mandatory_Documents')->references(['id'])->on('mandatory__documents')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
