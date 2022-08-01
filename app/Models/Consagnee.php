@@ -10,7 +10,7 @@ class Consagnee extends Model
 {
     use HasFactory;
 
-    protected $fillable=['bank_name','address','tf_number','permit_number','isDeleted'];
+    protected $fillable=['bank_name','address','postalCode','phoneNumber','lc_ref','tf_number','permit_number','isDeleted'];
     public function ConsigneeItem()
     {
         return $this->hasMany(Item::class, 'consignee_id', 'id');

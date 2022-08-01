@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConsigneesTable extends Migration
+class CreateConsagneesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateConsigneesTable extends Migration
      */
     public function up()
     {
-        Schema::create('consignees', function (Blueprint $table) {
+        Schema::create('consagnees', function (Blueprint $table) {
             $table->id();
             $table->string('bank_name', 500)->nullable();
             $table->string('address', 200)->nullable();
+            $table->string('postalCode', 200)->nullable();
+            $table->string('phoneNumber', 200)->nullable();
             $table->string('tf_number', 100)->nullable();
+            $table->string('lc_ref', 100)->nullable();
             $table->string('permit_number', 100)->nullable();
             $table->boolean('isDeleted')->nullable()->default(false);
             $table->timestamps();
@@ -32,6 +35,6 @@ class CreateConsigneesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('consignees');
+        Schema::dropIfExists('consagnees');
     }
 }

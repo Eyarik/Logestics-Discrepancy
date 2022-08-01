@@ -16,6 +16,8 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->text('item_description')->nullable();
+            $table->string('project_name')->nullable();
+            $table->string('item_type')->nullable();
             $table->json('PI', 50)->nullable();
             $table->unsignedBigInteger('consignee_id')->nullable()->index('IXFK_Items_Consignees');
             $table->unsignedBigInteger('air_discharge_id')->nullable()->index('IXFK_Items_Air_discharge_port');

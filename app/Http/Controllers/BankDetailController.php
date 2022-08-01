@@ -24,18 +24,13 @@ class BankDetailController extends Controller
         $validator = $request->validated();
 
         $Bank_detail = Bank_detail::create([
-            'bank_name' => $validator['bank_name'],
+            'account_holder' => $validator['account_holder'],
             'swift_code' => $validator['swift_code'],
             'account_number' => $validator['account_number'],
-            'bank_country' => $validator['bank_country'],
-            'bank_currency' => $validator['bank_currency'],
-            'iban' => $validator['iban'],
-            'manufacturer_id' => $request->manufacturer_id,
-            'frieght_forwarder_id' => $request->frieght_forwarder_id,
-            '_id' => $request->_id,
+            'beneficiary_bank_name' => $validator['beneficiary_bank_name'],
+            'iban_number' => $validator['iban_number'],
         ]);
-      
-
+    
         Log::info("Bank Detail Id= " . $Bank_detail->id . " created succesfully");
 
         return $this->successResponse($Bank_detail, 'Bank Detail created');
@@ -72,15 +67,12 @@ class BankDetailController extends Controller
         }
 
         $Bank_detail->update([
-            'bank_name' => $validator['bank_name'],
+            'account_holder' => $validator['account_holder'],
             'swift_code' => $validator['swift_code'],
             'account_number' => $validator['account_number'],
-            'bank_country' => $validator['iban'],
-            'bank_currency' => $validator['iban'],
-            'iban' => $validator['iban'],
-            'manufacturer_id' => $request->manufacturer_id,
-            'frieght_forwarder_id' => $request->frieght_forwarder_id,
-            '_id' => $request->_id,
+            'beneficiary_bank_name' => $validator['beneficiary_bank_name'],
+            'iban_number' => $validator['iban_number'],
+         
         ]);
        
         $Bank_detail->save();

@@ -121,7 +121,6 @@ class ItemController extends Controller
             'owner_id' => $request->owner_id,
             'shipment_mode_id' => $request->shipment_mode_id,
             'term_id' => $request->term_id,
-         
 
         ]);
 
