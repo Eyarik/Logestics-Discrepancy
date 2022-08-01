@@ -49,6 +49,8 @@ class ItemValidator extends FormRequest
             'cirtificate_of_origin_copy' => 'required',
             'bill_of_loading_original' => 'required',
             'bill_of_loading_copy' => 'required',
+            'phoneNumber' => 'required',
+            'postalCode' => 'required'
         ];
     }
 }

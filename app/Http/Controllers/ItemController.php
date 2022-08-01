@@ -53,6 +53,8 @@ class ItemController extends Controller
             'address' => $validator['consagnee_address'],
             'tf_number' => $validator['consagnee_tf_number'],
             'permit_number' => $validator['consagnee_permit_number'],
+            'postalCode' => $validator['postalCode'],
+            'phoneNumber' => $validator['phoneNumber'],
         ]);
 
         $term = Term::create([
