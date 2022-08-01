@@ -114,6 +114,8 @@ $template->setValue('ItemDescription', $items->item_description);
 
 //term and conditions
 $template->setValue('PaymentMode', $terms->payment_mode);
+$template->setValue('PartialShipment', $shipmentModes->shipment_mode);
+$template->setValue('TransShipment', $shipmentModes->shipment_mode);
 $template->setValue('ShipmentMode', $shipmentModes->shipment_mode);
 $template->setValue('LoadingPort', $loadingPorts->port_name);
 $template->setValue('Origin', $origins->name);
