@@ -10,7 +10,7 @@ class Bank_detail extends Model
 {
     use HasFactory;
     
-    protected $fillable=['account_holder','iban_number','swift_code','account_number','beneficiary_bank_name','isDeleted'];
+    protected $fillable=['bank_name','account_holder','iban_number','swift_code','account_number','beneficiary_bank_name','isDeleted'];
 
     public function BankDetailItem()
     {

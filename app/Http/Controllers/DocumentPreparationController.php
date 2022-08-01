@@ -104,8 +104,17 @@ $template->setValue('AttnEmail', $owners->attn_email);
 $template->setValue('PaymentMode', $owners->attn_email);
 $template->setValue('ShipmentMode', $owners->attn_email);
 $template->setValue('LoadingPort', $owners->attn_email);
+$template->setValue('Origin', $owners->attn_email);
 $template->setValue('DischargePort', $owners->attn_email);
 
+$template->setValue('Frieght', $owners->attn_email);
+
+//Bank details
+$template->setValue('AccountName', $banks->account_holder);
+$template->setValue('Iban', $banks->iban_number);
+$template->setValue('SwiftCode', $banks->swift_code);
+$template->setValue('AccountNumber', $banks->account_number);
+$template->setValue('BankName', $banks->attn_email);
 
 $template->saveAs('CI.docx');
 return response()->download(public_path('CI.docx'));
