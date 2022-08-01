@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\AirDischargeImport;
 use Illuminate\Http\Request;
 use App\Models\Air_discharge_port;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\Validators\AirDischargePortValidator;
+use App\Models\Air_loading_port;
+use App\Models\Origin;
+use App\Models\Sea_loading_port;
 use App\Utilities\ApiResponser;
+use Maatwebsite\Excel\Facades\Excel;
+
+use function PHPSTORM_META\map;
 
 class AirDischargePortController extends Controller
 {
-     
+
     use ApiResponser;
 
     public function index()
@@ -20,7 +27,7 @@ class AirDischargePortController extends Controller
     }
 
 
-    public function store(AirDischargePortValidator $request)
+    public function store(Request $request)
     {
         $validator = $request->validated();
 
@@ -29,13 +36,16 @@ class AirDischargePortController extends Controller
             'port_name' => $validator['port_name'],
             'origin_id' => $validator['origin_id'],
             'code' => $validator['code'],
-          
+
         ]);
-     
+
 
         Log::info("Air Discharge Id= " . $Air_discharge_port->id . " created succesfully");
 
         return $this->successResponse($Air_discharge_port, 'Air Discharge created');
+
+
+
     }
 
     public function show($id)
@@ -74,7 +84,7 @@ class AirDischargePortController extends Controller
             'origin_id' => $validator['origin_id'],
             'code' => $validator['code'],
         ]);
-       
+
         $Air_discharge_port->save();
         Log::info(" Air Discharge id=" . $Air_discharge_port->id . " successfully updated");
 

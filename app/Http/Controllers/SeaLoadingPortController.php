@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Sea_loading_port;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\Validators\SeaLoadingPortValidator;
+use App\Imports\AirDischargeImport;
+use App\Models\Origin;
 use App\Utilities\ApiResponser;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SeaLoadingPortController extends Controller
 {
@@ -28,9 +31,9 @@ class SeaLoadingPortController extends Controller
             'port_name' => $validator['port_name'],
             'origin_id' => $validator['origin_id'],
             'code' => $validator['code'],
-          
+
         ]);
-      
+
 
         Log::info("Sea Loading Id= " . $Sea_loading_port->id . " created succesfully");
 
@@ -73,7 +76,7 @@ class SeaLoadingPortController extends Controller
             'origin_id' => $validator['origin_id'],
             'code' => $validator['code'],
         ]);
-       
+
         $Sea_loading_port->save();
         Log::info(" Sea Loading id=" . $Sea_loading_port->id . " successfully updated");
 
@@ -100,5 +103,44 @@ class SeaLoadingPortController extends Controller
         ]);
         Log::info(" Sea Loading id=" . $Sea_loading_port->id . " deactivated successfully");
         return $this->successResponse(null, 'Deactivated successfully');
+    }
+
+    public function import(Request $request){
+        $request->validate([
+            'airdischarge' => 'required',
+        ]);
+        $import = new AirDischargeImport();
+
+        $datasss = Excel::toArray($import,$request->file('airdischarge'));
+
+        foreach ($datasss as $key => $datass) {
+            foreach ($datass as $key => $datas) {
+                    $airdischarge = Sea_loading_port::create([
+                        'country' => $datas['country'],
+                        'port_name' => $datas['port'],
+                        'code' => $datas['code']
+
+                    ]);
+            }
+
+        }
+
+        $portofloading = Sea_loading_port::all();
+
+        $origin = Origin::all();
+
+        foreach ($portofloading as $key => $port) {
+            foreach ($origin as $key => $country) {
+                if (strtoupper($port->country) === strtoupper($country->name)) {
+                    $portofloading = Sea_loading_port::find($port->id);
+
+                    $portofloading->origin_id = $country->id;
+
+                    $portofloading->save();
+                }
+            }
+        }
+
+        return 'done';
     }
 }

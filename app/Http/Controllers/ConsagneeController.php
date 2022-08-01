@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\Validators\ConsagneeValidator;
 use App\Utilities\ApiResponser;
+use Illuminate\Support\Facades\DB;
 
 class ConsagneeController extends Controller
 {
@@ -45,7 +46,7 @@ class ConsagneeController extends Controller
             'address' => $validator['address'],
             'tf_number' => $validator['tf_number'],
             'permit_number' => $validator['permit_number'],
-           
+
         ]);
 
         Log::info("Consagnee Id= " . $Consagnee->id . " created succesfully");

@@ -18,10 +18,13 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $fillable=['item_description','project_name','item_type','PI','consignee_id',
+    protected $fillable=['item_description','project_name','item_type','consignee_id',
 'air_discharge_id','sea_discharge_id','air_loading_id','sea_loading_id',
 'bank_detail_id','owner_id','shipment_mode_id','term_id','isDeleted'];
 
+protected $casts = [
+    'pi' => 'array',
+];
 public function Consignee()
 {
     return $this->belongsTo(Consagnee::class, 'consignee_id', 'id');

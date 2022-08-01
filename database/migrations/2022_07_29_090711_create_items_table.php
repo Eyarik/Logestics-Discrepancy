@@ -28,6 +28,7 @@ class CreateItemsTable extends Migration
             $table->unsignedBigInteger('owner_id')->nullable()->index('IXFK_Items_Owners');
             $table->unsignedBigInteger('shipment_mode_id')->nullable()->index('IXFK_Items_Shipment_modes');
             $table->unsignedBigInteger('term_id')->nullable()->index('IXFK_Items_Terms');
+            $table->unsignedBigInteger('mandatory_doc_id')->nullable()->index('IXFK_Items_Mandatory_Documents');
             $table->boolean('isDeleted')->nullable()->default(false);
             $table->timestamps();
 

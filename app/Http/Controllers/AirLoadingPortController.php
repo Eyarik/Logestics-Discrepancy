@@ -10,7 +10,7 @@ use App\Utilities\ApiResponser;
 
 class AirLoadingPortPortController extends Controller
 {
-    
+
     use ApiResponser;
 
     public function index()
@@ -28,9 +28,9 @@ class AirLoadingPortPortController extends Controller
             'country' => $validator['country'],
             'port_name' => $validator['port_name'],
             'origin_id' => $validator['origin_id'],
-          
+
         ]);
-      
+
 
         Log::info("Air Loading Id= " . $Air_loading_port->id . " created succesfully");
 
@@ -72,7 +72,7 @@ class AirLoadingPortPortController extends Controller
             'port_name' => $validator['port_name'],
             'origin_id' => $validator['origin_id'],
         ]);
-       
+
         $Air_loading_port->save();
         log::info(" Air Loading id=" . $Air_loading_port->id . " successfully updated");
 
@@ -97,7 +97,7 @@ class AirLoadingPortPortController extends Controller
             'isDeleted' => true,
 
         ]);
-        Log::info("  Air Loading id=" . $Air_loading_port->id . " deactivated successfully");
+        Log::info("Air Loading id=" . $Air_loading_port->id . " deactivated successfully");
         return $this->successResponse(null, 'Deactivated successfully');
     }
 }
