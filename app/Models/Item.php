@@ -23,7 +23,7 @@ class Item extends Model
 'bank_detail_id','owner_id','shipment_mode_id','term_id','isDeleted'];
 
 protected $casts = [
-    'pi' => 'array',
+    'PI' => 'array',
 ];
 public function Consignee()
 {

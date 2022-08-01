@@ -7,6 +7,7 @@ use App\Models\Sea_loading_port;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\Validators\SeaLoadingPortValidator;
 use App\Imports\AirDischargeImport;
+use App\Models\Air_loading_port;
 use App\Models\Origin;
 use App\Utilities\ApiResponser;
 use Maatwebsite\Excel\Facades\Excel;
@@ -115,11 +116,9 @@ class SeaLoadingPortController extends Controller
 
         foreach ($datasss as $key => $datass) {
             foreach ($datass as $key => $datas) {
-                    $airdischarge = Sea_loading_port::create([
+                    $airdischarge = Air_loading_port::create([
                         'country' => $datas['country'],
-                        'port_name' => $datas['port'],
-                        'code' => $datas['code']
-
+                        'port_name' => $datas['airport_name'],
                     ]);
             }
 

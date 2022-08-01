@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "bd91a98372779d052997cb1356933a98",
-=======
-    "content-hash": "de124eca22f6adf3591ea8b4043dc64e",
->>>>>>> e927bc90418b94c8a8e5e7b6d27cc6e6a5a4975e
+    "content-hash": "545b620dde1d96b3ed84daa7c988b60d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2568,7 +2564,6 @@
             "time": "2022-01-27T09:35:39+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "phpoffice/phpspreadsheet",
             "version": "1.24.1",
             "source": {
@@ -2673,12 +2668,8 @@
             "time": "2022-07-18T19:50:48+00:00"
         },
         {
-            "name": "phpoption/phpoption",
-            "version": "1.8.1",
-=======
             "name": "phpoffice/phpword",
             "version": "0.18.3",
->>>>>>> e927bc90418b94c8a8e5e7b6d27cc6e6a5a4975e
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PHPWord.git",

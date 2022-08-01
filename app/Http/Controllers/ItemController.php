@@ -53,8 +53,8 @@ class ItemController extends Controller
             'address' => $validator['consagnee_address'],
             'tf_number' => $validator['consagnee_tf_number'],
             'permit_number' => $validator['consagnee_permit_number'],
-            'postalCode' => $validator['postalCode'],
-            'phoneNumber' => $validator['phoneNumber'],
+            'postalCode' => $validator['consagnee_postalCode'],
+            'phoneNumber' => $validator['consagnee_phoneNumber'],
         ]);
 
         $term = Term::create([
@@ -62,6 +62,7 @@ class ItemController extends Controller
             'trans_shipment' => $validator['trans_shipment'],
             'lc_type' => $validator['lc_type'],
             'frieght_payment' => $validator['frieght_payment'],
+            'payment_mode' => $validator['payment_mode']
         ]);
 
         $owner = Owner::create([
@@ -72,6 +73,7 @@ class ItemController extends Controller
             'attn_phone_number' => $validator['attn_phone_number'],
             'attn_email' => $validator['attn_email'],
         ]);
+
         $mandatory_doc = Mandatory_Document::create([
             'comertial_invoice_original' => $validator['comertial_invoice_original'],
             'comertial_invoice_copy' => $validator['comertial_invoice_copy'],
@@ -127,7 +129,7 @@ class ItemController extends Controller
 
         Log::info("Item Id= " . $item->id . " created succesfully");
 
-        return $this->successResponse($item, 200);
+        return $this->successResponse($consagnee, 200);
 
     }
 
