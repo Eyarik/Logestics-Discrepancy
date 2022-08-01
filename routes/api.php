@@ -28,6 +28,7 @@ require __DIR__ . '/api/seaLoadingapi.php';
 require __DIR__ . '/api/shipmentmodeapi.php';
 require __DIR__ . '/api/termapi.php';
 require __DIR__ . '/api/packinglistapi.php';
+require __DIR__ . '/api/commercialinvoiceapi.php';
 
 Route::post('scm/discrepancy/airdischarge', [AirDischargePortController::class, 'store']);
 

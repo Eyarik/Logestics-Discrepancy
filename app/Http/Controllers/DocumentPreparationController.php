@@ -48,37 +48,38 @@ return response()->download(public_path('PL.docx'));
 }
 Public function CommercialInvoice($id){
 $template = new TemplateProcessor('comercialInvoicetemplate.docx');
-$consignees=DB::table('items')->where('id',$id)
+$items=DB::table('items')->where('items.id',$id)->first();
+$consignees=DB::table('items')->where('items.id',$id)
 ->join('consagnees','items.consignee_id','=','consagnees.id')
-->get();
+->first();
 
-$banks=DB::table('items')->where('id',$id)
+$banks=DB::table('items')->where('items.id',$id)
 ->join('bank_details','items.bank_detail_id','=','bank_details.id')
-->get();
-$owners=DB::table('items')->where('id',$id)
-->join('ownwers','items.owner_id','=','owners.id')
-->get();
-$shipmentModes=DB::table('items')->where('id',$id)
+->first();
+$owners=DB::table('items')->where('items.id',$id)
+->join('owners','items.owner_id','=','owners.id')
+->first();
+$shipmentModes=DB::table('items')->where('items.id',$id)
 ->join('shipment_modes','items.shipment_mode_id','=','shipment_modes.id')
-->get();
-$terms=DB::table('items')->where('id',$id)
+->first();
+$terms=DB::table('items')->where('items.id',$id)
 ->join('terms','items.term_id','=','terms.id')
-->get();
+->first();
 if ($shipmentModes->shipment_mode=='Air'){
-    $dischargePorts=DB::table('items')->where('id',$id)
+    $dischargePorts=DB::table('items')->where('items.id',$id)
     ->join('air_discharge_ports','items.air_discharge_id','=','air_discharge_ports.id')
-    ->get();
-    $loadingPorts=DB::table('items')->where('id',$id)
+    ->first();
+    $loadingPorts=DB::table('items')->where('items.id',$id)
     ->join('air_loading_ports','items.air_loading_id','=','air_loading_ports.id')
-    ->get();
+    ->first();
 }
 else{
-    $dischargePorts=DB::table('items')->where('id',$id)
+    $dischargePorts=DB::table('items')->where('items.id',$id)
     ->join('sea_discharge_ports','items.sea_discharge_id','=','sea_discharge_ports.id')
-    ->get();
-    $loadingPorts=DB::table('items')->where('id',$id)
+    ->first();
+    $loadingPorts=DB::table('items')->where('itemsid',$id)
     ->join('sea_loading_ports','items.sea_loading_id','=','sea_loading_ports.id')
-    ->get();
+    ->first();
 }
 
 
@@ -99,6 +100,8 @@ $template->setValue('AttnName', $owners->attn_name);
 $template->setValue('AttnPhone', $owners->attn_phone_number);
 $template->setValue('AttnEmail', $owners->attn_email);
 
+//ItemDescription
+$template->setValue('ItemDescription', $items->item_description);
 
 //term and conditions
 $template->setValue('PaymentMode', $owners->attn_email);
