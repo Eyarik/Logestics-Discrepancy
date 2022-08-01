@@ -15,7 +15,7 @@ class CreateTermsTable extends Migration
     {
         Schema::create('terms', function (Blueprint $table) {
             $table->id();
-            $table->string('partial_mode', 50)->nullable();
+            $table->string('payment_mode', 50)->nullable();
             $table->string('partial_shipment', 50)->nullable();
             $table->string('trans_shipment', 50)->nullable();
             $table->string('lc_type', 200)->nullable();
