@@ -14,7 +14,7 @@ class CreateShipmentModesTable extends Migration
     public function up()
     {
         Schema::create('shipment_modes', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->string('shipment_mode', 50)->nullable();
             $table->boolean('isDeleted')->nullable()->default(false);
             $table->timestamps();

@@ -14,7 +14,7 @@ class CreateBankDetailsTable extends Migration
     public function up()
     {
         Schema::create('bank_details', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->string('account_holder', 50)->nullable();
             $table->string('iban_number', 50)->nullable();
             $table->string('swift_code', 50)->nullable();

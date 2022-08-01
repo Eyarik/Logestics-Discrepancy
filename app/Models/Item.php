@@ -9,7 +9,10 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $fillable=['item_description','PI','consignee_id',
+    protected $fillable=['item_description','consignee_id',
 'air_discharge_id','sea_discharge_id','air_loading_id','sea_loading_id',
-'bank_detail_id','owner_id','shipment_mode_id','term_id','isDeleted'];
+'bank_detail_id','owner_id','shipment_mode_id','term_id','mandatory_doc_id','isDeleted'];
+protected $casts = [
+    'pi' => 'array',
+];
 }

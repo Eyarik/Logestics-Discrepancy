@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSeaDischargePortTable extends Migration
+class CreateSeaDischargePortsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateSeaDischargePortTable extends Migration
      */
     public function up()
     {
-        Schema::create('sea_discharge_port', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+        Schema::create('sea_discharge_ports', function (Blueprint $table) {
+            $table->id();
             $table->string('country', 50)->nullable();
             $table->string('port_name', 50)->nullable();
             $table->string('code', 50)->nullable();
@@ -32,6 +32,6 @@ class CreateSeaDischargePortTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sea_discharge_port');
+        Schema::dropIfExists('sea_discharge_ports');
     }
 }
