@@ -46,7 +46,6 @@ return response()->download(public_path('PL.docx'));
 
 }
 Public function CommercialInvoice($id){
-$template = new TemplateProcessor('comercialInvoicetemplate.docx');
 $items =Item::with('Consignee','AirDischarge','SeaDischarge','AirLoading','SeaLoading',
         'BankDetail','Owner','ShipmentMode','Term')->where('id', $id)->first();
 $consignees=DB::table('items')->where('items.id',$id)
@@ -69,6 +68,13 @@ $terms=DB::table('items')->where('items.id',$id)
 ->join('terms','items.term_id','=','terms.id')
 ->first();
 
+if($terms->frieght_payment=="FOB"){
+    $template = new TemplateProcessor('comercialInvoicetemplate_FOB.docx');
+}
+else{
+    $template = new TemplateProcessor('comercialInvoicetemplate.docx');
+}
+
 if ($shipmentModes->shipment_mode=='Air'){
     $dischargePorts=DB::table('items')->where('items.id',$id)
     ->join('air_discharge_ports','items.air_discharge_id','=','air_discharge_ports.id')
@@ -77,8 +83,7 @@ if ($shipmentModes->shipment_mode=='Air'){
     ->join('air_loading_ports','items.air_loading_id','=','air_loading_ports.id')
     ->first();
     $origins=DB::table('items')->where('items.id',$id)
-    ->join('air_discharge_ports','items.air_discharge_id','=','air_discharge_ports.id')
-    ->join('origins','air_discharge_ports.origin_id','=','origins.id')
+    ->join('air_loading_ports','items.air_loading_id','=','air_loading_ports.id')
     ->first();
 }
 else{
@@ -90,7 +95,6 @@ else{
     ->first();
     $origins=DB::table('items')->where('items.id',$id)
     ->join('sea_loading_ports','items.sea_discharge_id','=','sea_loading_ports.id')
-    ->join('origins','sea_loading_ports.origin_id','=','origins.id')
     ->first();
 }
 
@@ -121,16 +125,24 @@ $template->setValue('PartialShipment', $shipmentModes->shipment_mode);
 $template->setValue('TransShipment', $shipmentModes->shipment_mode);
 $template->setValue('ShipmentMode', $shipmentModes->shipment_mode);
 $template->setValue('LoadingPort', $loadingPorts->port_name);
-$template->setValue('Origin', $origins->name);
+$template->setValue('Origin', $origins->country);
 $template->setValue('DischargePort', $dischargePorts->port_name);
 $template->setValue('Frieght', $terms->frieght_payment);
+$template->setValue('Incoterm', $terms->incoterm);
+
+//Payment Information
+$template->setValue('TotalPayment', $terms->total_price);
+$template->setValue('FreightCost', $terms->frieght_cost);
+$template->setValue('TotalCost', $terms->cost_and_frieght);
+
 
 //Bank details
 $template->setValue('AccountName', $banks->account_holder);
 $template->setValue('Iban', $banks->iban_number);
 $template->setValue('SwiftCode', $banks->swift_code);
 $template->setValue('AccountNumber', $banks->account_number);
-$template->setValue('BankName', $banks->bank_name);
+$template->setValue('BankName', $banks->beneficiary_bank_name);
+
 
 $pi = [];
 foreach ($items->PI as $key => $item) {
@@ -140,16 +152,34 @@ foreach ($items->PI as $key => $item) {
         'HsCode' => $item['hs_code'],
         'UOM' => $item['uom'],
         'QTY' => $item['qty'],
+        'BatchId'=>$item['batch_id']
     ];
-
     $pi[] = $val;
 
+  //  $template->cloneRow('ItemPartNumber', 1);
+
 }
+//$template->cloneRowAndSetValues('ItemPartNumber', $pi);
 
-return $pi;
-$template->cloneRowAndSetValues('ItemPartNumber', $pi);
+// for ($i=0;$i<count($pi);$i++) {
+// $template->setValues(array('ItemPartNumber' => $pi[$i]['ItemPartNumber'], 'Description' =>$pi[$i]['Description']));
+// //dd($pi[$i]['ItemPartNumber']);
+// }
+//dd($pi);
+
+//$template->cloneRowAndSetValues('BatchId', $pi);
+//$template->cloneRowAndSetValues('BatchId', $pi);
 
 
+
+
+// $template->setValue('ItemPartNumber',  $item['part_number']);
+// $template->setValue('Description',  $item['item_description']);
+// $template->setValue('HsCode',  $item['hs_code']);
+// $template->setValue('UOM',  $item['uom']);
+// $template->setValue('QTY',  $item['qty']);
+// $template->setValue('UnitPrice',  $item['usd_unit_price']);
+// $template->setValue('TotalPrice',  $item['total_line_price']);
 
 
 
