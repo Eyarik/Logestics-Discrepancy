@@ -130,29 +130,54 @@ $template->setValue('SwiftCode', $banks->swift_code);
 $template->setValue('AccountNumber', $banks->account_number);
 $template->setValue('BankName', $banks->bank_name);
 
-$pi = [];
-foreach ($items->PI as $key => $item) {
-    $val = [
-        'ItemPartNumber' => $item['part_number'],
-        'Description' => $item['item_description'],
-        'HsCode' => $item['hs_code'],
-        'UOM' => $item['uom'],
-        'QTY' => $item['qty'],
-    ];
+// $pi = [];
+// $i = 1;
+// foreach ($items->PI as $key => $item) {
+//     $val = [
+//         'itemId' => $i,
+//         'ItemPartNumber' => $item['part_number'],
+//         'Description' => $item['item_description'],
+//     ];
 
-    $pi[] = $val;
+//     $pi[] = $val;
 
-}
+//     $template->setValues(array($val));
 
-return $pi;
-$template->cloneRowAndSetValues('ItemPartNumber', $pi);
+//     $i++;
 
+// }
 
+// $count = 1;
+// foreach ($pi as $key => $pis) {
+//     # code...
+//     $template->cloneRow('itemId', count($pi));
+//     $template->setValue('itemId#'.$count, '1');
+//     $count++;
+// }
+
+// dd($pi);
+
+// array of titles
+// $allTitles = array_map(function($data){return $data['ItemPartNumber'];}, $pi);
+// $count = 1;
+// foreach ($allTitles as $key => $itemnum) {
+//     $template->cloneRow('ItemPartNumber', count($pi));
+//     $template->setValue(`ItemPartNumber#`.$count, 'string');
+//     $count++;
+// }
+// array of content
+//$allContent = array_map(function($data){return $data['Description'];}, $pi);
+// $template->cloneRow('ItemPartNumber', count($pi));
+
+// $template->setValue('ItemPartNumber', implode("\r\n", $allTitles));
+// $template->setValue('Description', implode("\r\n", $allContent));
+
+//$template->cloneRowAndSetValues('itemId', $pi);
 
 
 
 $template->saveAs('CI.docx');
-return response()->download(public_path('CI.docx'));
+    return response()->download(public_path('CI.docx'));
 }
 
 }

@@ -10,6 +10,7 @@ use App\Imports\Piimport;
 use App\Models\Consagnee;
 use App\Models\Mandatory_Document;
 use App\Models\Owner;
+use App\Models\Pi;
 use App\Models\Term;
 use App\Utilities\ApiResponser;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +27,7 @@ class ItemController extends Controller
 
     public function index()
     {
-        $Items = Item::with('Consignee','AirDischarge','SeaDischarge','AirLoading','SeaLoading',
+        $Items = Item::with('Consignee','mandatoryDoc','AirDischarge','SeaDischarge','AirLoading','SeaLoading',
         'BankDetail','Owner','ShipmentMode','Term')->where('isDeleted', false)->get();
         return $this->successResponse($Items, 200);
 
@@ -55,14 +56,21 @@ class ItemController extends Controller
             'permit_number' => $validator['consagnee_permit_number'],
             'postalCode' => $validator['consagnee_postalCode'],
             'phoneNumber' => $validator['consagnee_phoneNumber'],
+            'lc_ref' => $validator['lc_ref'],
         ]);
 
+        $cost_and_frieght = $validator['total_price'] + $validator['frieght_cost'];
         $term = Term::create([
             'partial_shipment' => $validator['partial_shipment'],
             'trans_shipment' => $validator['trans_shipment'],
             'lc_type' => $validator['lc_type'],
             'frieght_payment' => $validator['frieght_payment'],
-            'payment_mode' => $validator['payment_mode']
+            'payment_mode' => $validator['payment_mode'],
+            'time_of_arrival' => $request->time_of_arrival,
+            'incoterm' => $validator['incoterm'],
+            'total_price' => $validator['total_price'],
+            'fright_cost' => $validator['frieght_cost'],
+            'cost_and_fright' => $cost_and_frieght,
         ]);
 
         $owner = Owner::create([
@@ -105,6 +113,8 @@ class ItemController extends Controller
                         "total_line_price" => $data['total_line_price'],
                         "batch_id" => null
                     ];
+
+
                 }
                 array_push($pi_data,$pi_dataa);
             }
@@ -113,11 +123,11 @@ class ItemController extends Controller
         $item = new Item();
         $item->item_description = $request->item_description;
         $item->consignee_id = $consagnee->id;
-        $item->air_discharge_id =  $validator['air_discharge_id'];
-        $item->sea_discharge_id = $validator['sea_discharge_id'];
-        $item->air_loading_id = $validator['air_loading_id'];
-        $item->sea_loading_id = $validator['sea_loading_id'];
-        $item->bank_detail_id = $validator['bank_detail_id'];
+        $item->air_discharge_id =  $request->air_discharge_id;
+        $item->sea_discharge_id = $request->sea_discharge_id;
+        $item->air_loading_id = $request->air_loading_id;
+        $item->sea_loading_id = $request->sea_loading_id;
+        $item->bank_detail_id = $request->bank_detail_id;
         $item->owner_id = $owner->id;
         $item->shipment_mode_id = $validator['shipment_mode_id'];
         $item->term_id = $term->id;
@@ -126,6 +136,24 @@ class ItemController extends Controller
         $item->mandatory_doc_id = $mandatory_doc->id;
         $item->PI = $pi_data;
         $item->save();
+
+
+        foreach ($datass as $key => $datas) {
+            foreach ($datas as $key => $data) {
+                if ($data['part_number'] != null) {
+                    $pi_dataa = Pi::create([
+                        "part_number" => $data['part_number'],
+                        "item_description" => $data['item_description'],
+                        "hs_code" => $data['hs_code'],
+                        "uom" => $data["uom"],
+                        "qty" => $data['qty'],
+                        "usd_unit_price" => $data['usd_unit_price'],
+                        "total_line_price" => $data['total_line_price'],
+                        "item_id" => $item->id,
+                    ]);
+                }
+            }
+        }
 
         Log::info("Item Id= " . $item->id . " created succesfully");
 
@@ -141,7 +169,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $Item =Item::with('Consignee','AirDischarge','SeaDischarge','AirLoading','SeaLoading',
+        $Item =Item::with('Consignee','mandatoryDoc','AirDischarge','SeaDischarge','AirLoading','SeaLoading',
         'BankDetail','Owner','ShipmentMode','Term')->where('id', $id)->first();
         if ($Item==null) {
 
@@ -155,11 +183,7 @@ class ItemController extends Controller
 
         }
 
-        foreach ($Item->PI as $key => $pi) {
-            return $pi['part_number'];
-        }
-
-        return $this->successResponse($Item->PI, 200);
+        return $this->successResponse($Item, 200);
 
     }
 

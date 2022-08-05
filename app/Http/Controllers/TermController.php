@@ -25,6 +25,11 @@ class TermController extends Controller
             'trans_shipment' => $validator['trans_shipment'],
             'lc_type' => $validator['lc_type'],
             'frieght_payment' => $validator['frieght_payment'],
+            'time_of_arrival' => $validator['time_of_arrival'],
+            'incoterm' => $validator['incoterm'],
+            'total_price' => $validator['total_price'],
+            'frieght_cost' => $validator['frieght_cost'],
+            'cost_and_fright' => $validator['cost_and_fright'],
         ]);
 
         return $this->successResponse($term, 'term Mode Created');

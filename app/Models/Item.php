@@ -62,5 +62,15 @@ public function Term()
     return $this->belongsTo(Term::class, 'term_id', 'id');
 }
 
+public function mandatoryDoc()
+{
+    return $this->belongsTo(Mandatory_Document::class, 'mandatory_doc_id', 'id');
+}
+
+public function pis()
+{
+    return $this->hasMany(Pi::class, 'item_id', 'id');
+}
+
 
 }

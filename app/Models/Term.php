@@ -10,7 +10,7 @@ class Term extends Model
 {
     use HasFactory;
 
-    protected $fillable=['payment_mode','partial_shipment','trans_shipment','lc_type','frieght_payment'];
+    protected $fillable=['payment_mode','partial_shipment','trans_shipment','lc_type','frieght_payment','time_of_arrival','incoterm','total_price','frieght_cost','cost_and_fright'];
 
     public function TermItem()
     {
