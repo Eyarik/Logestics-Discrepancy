@@ -38,7 +38,7 @@ class TermController extends Controller
     public function show($id)
     {
         $term = Term::where('id', $id)->first();
-        if (!$term) {
+        if ($term==null) {
 
             Log::info("Term id=" . $id . " not found");
             return $this->errorResponse(' Id Not found');
@@ -81,7 +81,7 @@ class TermController extends Controller
             Log::info(" term id=" . $id . "not found");
             return $this->errorResponse('Id Not found');
         } elseif ($term->isDeleted == true) {
-            Log::info("term id=" . $term->id . " is a deactivated Supplier");
+            Log::info("term id=" . $term->id . " is a deactivated term");
             return $this->successResponse(null, 'this term id is deleted already');
         }
 
