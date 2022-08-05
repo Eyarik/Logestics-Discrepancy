@@ -68,13 +68,16 @@ $terms=DB::table('items')->where('items.id',$id)
 ->join('terms','items.term_id','=','terms.id')
 ->first();
 
+//process fob template
 if($terms->frieght_payment=="FOB"){
     $template = new TemplateProcessor('comercialInvoicetemplate_FOB.docx');
 }
+//process prepaid frieght payment template
 else{
     $template = new TemplateProcessor('comercialInvoicetemplate.docx');
 }
 
+//for air shipments
 if ($shipmentModes->shipment_mode=='Air'){
     $dischargePorts=DB::table('items')->where('items.id',$id)
     ->join('air_discharge_ports','items.air_discharge_id','=','air_discharge_ports.id')
@@ -86,6 +89,7 @@ if ($shipmentModes->shipment_mode=='Air'){
     ->join('air_loading_ports','items.air_loading_id','=','air_loading_ports.id')
     ->first();
 }
+//for sea shipments
 else{
     $dischargePorts=DB::table('items')->where('items.id',$id)
     ->join('sea_discharge_ports','items.sea_discharge_id','=','sea_discharge_ports.id')
@@ -145,21 +149,21 @@ $template->setValue('BankName', $banks->beneficiary_bank_name);
 
 
 $pi = [];
-foreach ($items->PI as $key => $item) {
+foreach ($terms as $term) {
     $val = [
-        'ItemPartNumber' => $item['part_number'],
-        'Description' => $item['item_description'],
-        'HsCode' => $item['hs_code'],
-        'UOM' => $item['uom'],
-        'QTY' => $item['qty'],
-        'BatchId'=>$item['batch_id']
+        'ItemPartNumber' => $term['payment_mode'],
+        'Description' => $term['partial_shipment'],
+        'HsCode' => $term['trans_shipment'],
+        'UOM' => $term['lc_type'],
+        // 'QTY' => $item['qty'],
+        // 'BatchId'=>$item['batch_id']
     ];
     $pi[] = $val;
 
   //  $template->cloneRow('ItemPartNumber', 1);
 
 }
-//$template->cloneRowAndSetValues('ItemPartNumber', $pi);
+$template->cloneRowAndSetValues('ItemPartNumber', $pi);
 
 // for ($i=0;$i<count($pi);$i++) {
 // $template->setValues(array('ItemPartNumber' => $pi[$i]['ItemPartNumber'], 'Description' =>$pi[$i]['Description']));
